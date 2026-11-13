@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Informática y la Robótica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h2>Tecnología</h2>
+            <div class="menu">
+                <a href="#inicio">Inicio</a>
+                <a href="#historia">Historia</a>
+                <a href="#aplicaciones">Aplicaciones</a>
+                <a href="#futuro">Futuro</a>
+                <a href="#quiz">Cuestionario</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="portada" id="inicio">
+        <div class="portada-texto">
+            <h1>La Informática y la Robótica</h1>
+
+            <p>
+                Descubrí cómo la tecnología transforma
+                nuestro mundo y construye el futuro.
+            </p>
+
+            <a href="#historia" class="boton">
+                Descubrir más
+            </a>
+        </div>
+
+        <img src="img/robotica.jpg" alt="Imagen de robótica">
+    </section>
+
+    <main>
+
+        <section class="info" id="historia">
+            <h2>Historia e Importancia</h2>
+
+            <p>
+                Desde los primeros diagramas mecánicos y el
+                desarrollo de las primeras computadoras en el
+                siglo XX, ambos campos han evolucionado a pasos
+                agigantados. Hoy en día son pilares fundamentales
+                de la sociedad, ya que optimizan procesos
+                industriales, mejoran los sistemas de comunicación
+                y permiten automatizar tareas complejas que
+                benefician la vida cotidiana.
+            </p>
+        </section>
+
+        <section class="info" id="aplicaciones">
+            <h2>Aplicaciones Actuales</h2>
+
+            <p>
+                Estas tecnologías se encuentran presentes en
+                múltiples áreas, desde la medicina con cirugía
+                asistida por robots, hasta el desarrollo de
+                vehículos autónomos y la exploración espacial.
+                Además, el análisis de datos masivos y los sistemas
+                informáticos integrados permiten que las máquinas
+                aprendan y adapten sus acciones en tiempo real.
+            </p>
+        </section>
+
+        <section class="info" id="futuro">
+            <h2>El Futuro de la Robótica e Informática</h2>
+
+            <p>
+                El mañana de estas disciplinas está liderado
+                por la integración de la inteligencia artificial,
+                la computación cuántica y la nanorrobótica.
+                A medida que estas herramientas se vuelven más
+                avanzadas y accesibles, continuarán transformando
+                el mercado laboral y abriendo nuevas posibilidades
+                para resolver desafíos globales.
+            </p>
+
+            <button class="boton" id="masInfo">
+                Conocer más
+            </button>
+
+            <p id="extra" class="oculto">
+                La inteligencia artificial permitirá desarrollar
+                robots cada vez más inteligentes, capaces de
+                aprender, resolver problemas y colaborar con
+                los seres humanos en diferentes actividades.
+            </p>
+        </section>
+
+        <section class="quiz" id="quiz">
+
+            <h2>Ahora, poné a prueba tus conocimientos.</h2>
+
+            <p>¿Qué disciplina se encarga del desarrollo de software?</p>
+
+            <div class="opciones">
+                <button class="respuesta">Robótica</button>
+                <button class="respuesta correcta">Informática</button>
+                <button class="respuesta">Mecánica</button>
+            </div>
+
+            <p id="resultado"></p>
+
+            <button class="boton" id="reiniciar">
+                Volver a intentar
+            </button>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Antonella Fiscalini y Thomas Mulvihill 4B</p>
+    </footer>
+
+    <script>
+
+
+        const masInfo = document.getElementById("masInfo");
+        const extra = document.getElementById("extra");
+
+        masInfo.addEventListener("click", function() {
+
+            extra.classList.toggle("oculto");
+
+            if (extra.classList.contains("oculto")) {
+                masInfo.textContent = "Conocer más";
+            } else {
+                masInfo.textContent = "Mostrar menos";
+            }
+
+        });
+
+
+        const respuestas = document.querySelectorAll(".respuesta");
+        const resultado = document.getElementById("resultado");
+        const reiniciar = document.getElementById("reiniciar");
+
+        respuestas.forEach(function(respuesta) {
+
+            respuesta.addEventListener("click", function() {
+
+                respuestas.forEach(function(boton) {
+                    boton.disabled = true;
+                });
+
+                if (respuesta.classList.contains("correcta")) {
+
+                    resultado.textContent = "Esa es la respuesta es correcta.";
+
+                    resultado.style.color = "#16a34a";
+
+                } else {
+
+                    resultado.textContent = "Esa no es la respuesta correcta.";
+
+                    resultado.style.color = "#dc2626";
+
+                }
+
+            });
+
+        });
+
+
+        reiniciar.addEventListener("click", function() {
+
+            respuestas.forEach(function(boton) {
+                boton.disabled = false;
+            });
+
+            resultado.textContent = "";
+
+        });
+
+
+        const secciones = document.querySelectorAll(".info, .quiz");
+
+        const observador = new IntersectionObserver(function(elementos) {
+
+            elementos.forEach(function(elemento) {
+
+                if (elemento.isIntersecting) {
+                    elemento.target.classList.add("visible");
+                }
+
+            });
+
+        }, {
+            threshold: 0.15
+        });
+
+        secciones.forEach(function(seccion) {
+            observador.observe(seccion);
+        });
+
+    </script>
+
+</body>
+</html>
